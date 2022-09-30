@@ -39,5 +39,7 @@ body {
   }
 
 
-
+  #my-canvas {
+    display: none;
+  }
  

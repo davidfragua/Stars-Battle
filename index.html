@@ -4,13 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Stars Battle</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <div class = "container">
+        <!-- SPLASH SCREEN-->
+        <div id = "splash-screen" class="container">
+            <img src = "./images/Logo Stars Battle.png" alt="logo Stars Battle">
+            </br>
+            <img src = "./images/space.png" alt="Juego Stars Battle" width = "400px" height = "300px">
+            <button id = "start-btn">PLAY</button>
+        </br>
+            <h3>CONTROLES DEL JUEGO</h3>
+            <img src = "./images/game-keys.png" alt="Controles del juego" width = "150px" height = "180px">
+
+        </div>
+
+        <!-- GAME SCREEN-->
+        <div id = "game-screen">
+        <canvas id = "my-canvas" width="600" height="800"></canvas>
+
+        </div>
+        <!-- GAMEOVER SCREEN-->
+
+        <div id = "gameOver-screen">
+
+        </div>
+
+
+
+    </div>
   
     
 
     <script src = "./scripts/main.js"></script>
+    <script src = "./scripts/game.js"></script>
 </body>
 </html>

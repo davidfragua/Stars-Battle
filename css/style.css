@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    background-color: #1b323b;
+    color: white;
+  }
+
+  #my-canvas {
+    background-color: lightgray;
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+  }
+
+  #main-image {
+    width: 400px;
+    height: 300px;
+  }
+  #start-btn {
+    background-color: lightslategray;
+    color: white;
+    width: 180px;
+    padding: 20px;
+    font-size: 20px;
+    margin-top: 40px;
+    border-radius: 10px; 
+    box-shadow: 3px 3px 2px lightgray;
+  }
+
+  #start-btn:hover {
+    background-color: lightgrey;
+    color: lightslategray;
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+
+
+
+ 

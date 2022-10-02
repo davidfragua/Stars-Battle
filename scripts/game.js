@@ -1,9 +1,15 @@
 class Game {
 
-    constructor () {
+    constructor() {
         // fondo
-        this.fondo = new Image;
+        this.fondo = new Image();
         this.fondo.src = "./images/background.png";
+        // jugador
+        this.playerObj = new Player();
+        this.enemyObj = new Enemies();
+
+
+
     }
 
 
@@ -28,6 +34,8 @@ gameLoop = () =>{
 
     // 3. dibujado
     this.drawFondo();
+    this.playerObj.drawPlayer();
+    this.enemyObj.drawEnemy();
 
     // 4. control de la recursión
     requestAnimationFrame(this.gameLoop);

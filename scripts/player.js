@@ -8,6 +8,7 @@ class Player {
         this.y = 680;
         this.w = 50;
         this.h = 70;
+        this.speed = 20;
 
 
     }
@@ -17,4 +18,17 @@ class Player {
     drawPlayer = () =>{
         ctx.drawImage(this.player, this.x , this.y , this.w , this.h );
     } ;
+
+    // movimiento jugador
+    movePlayerRight = () => {
+        this.x = this.x + this.speed;
+    }
+
+    movePlayerLeft = () => {
+        this.x = this.x - this.speed;
+    }
+
+  
+
+
 }

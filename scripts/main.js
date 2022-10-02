@@ -32,3 +32,16 @@ const startGame = () =>{
 // ADD EVENT LISTENER
 // activo el juego al pinchar en Play
 startBtn.addEventListener("click", startGame);
+
+// movimiento jugador
+window.addEventListener("keydown", (event)=>{
+    if (event.code === "ArrowRight") {
+       gameObj.playerObj.movePlayerRight()
+    } else if (event.code = "ArrowLeft") {
+        gameObj.playerObj.movePlayerLeft()
+        } 
+
+})
+    
+
+    

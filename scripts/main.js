@@ -37,10 +37,13 @@ startBtn.addEventListener("click", startGame);
 window.addEventListener("keydown", (event)=>{
     if (event.code === "ArrowRight") {
        gameObj.playerObj.movePlayerRight()
-    } else if (event.code = "ArrowLeft") {
+    } else if (event.code === "ArrowLeft") {
         gameObj.playerObj.movePlayerLeft()
-        } 
-
+    } else if (event.code === "ArrowUp") {
+        gameObj.playerObj.movePlayerUp()
+    } else if (event.code === "ArrowDown") {
+        gameObj.playerObj.movePlayerDown()
+    }
 })
     
 

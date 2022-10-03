@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 const startScreen = document.querySelector("#splash-screen");
 const startBtn = document.querySelector("#start-btn");
 const gameOverScreen = document.querySelector("#gameOver-screen")
+const restartBtn = document.querySelector("#restart-btn")
 
 let gameObj;
 
@@ -12,7 +13,7 @@ let gameObj;
 
 const startGame = () =>{
 
-    console.log("iniciando")
+    // console.log("iniciando")
     // inicio el juego y oculto la splash screen
     startScreen.style.display = "none";
     canvas.style.display = "block";
@@ -43,6 +44,8 @@ window.addEventListener("keydown", (event)=>{
         gameObj.playerObj.movePlayerUp()
     } else if (event.code === "ArrowDown") {
         gameObj.playerObj.movePlayerDown()
+    } else if (event.code === "Space"){
+        gameObj.shoot()
     }
 })
     

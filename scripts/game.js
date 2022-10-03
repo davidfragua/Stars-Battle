@@ -11,7 +11,8 @@ class Game {
         this.enemiesArr = [];
         this.frames = 0;
 
-
+        this.isGameOn = true;
+    
     }
 
 
@@ -32,7 +33,30 @@ class Game {
         }
     }
 
+        // colisión enemigo vs jugador
+    playerEnemyCollision = () =>{
 
+        this.enemiesArr.forEach( (eachEnemy) =>{
+            if (
+                this.playerObj.x < eachEnemy.x + eachEnemy.w &&
+                this.playerObj.x + this.playerObj.w > eachEnemy.x &&
+                this.playerObj.y < eachEnemy.y + eachEnemy.h &&
+                this.playerObj.h + this.playerObj.y > eachEnemy.y
+              ) { 
+                // console.log("Colisión") 
+                this.gameOver()
+               
+              }
+            })
+    
+    }
+
+
+    gameOver = () =>{
+        this.isGameOn = false;
+
+        canvas.getElementsByClassName.display = "none";
+    }
 
 
 gameLoop = () =>{
@@ -58,9 +82,12 @@ gameLoop = () =>{
     })
    
     this.addEnemy();
+    this.playerEnemyCollision();
 
     // 4. control de la recursión
+    if (this.isGameOn === true){
     requestAnimationFrame(this.gameLoop);
+    }
 
 
 }

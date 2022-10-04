@@ -21,7 +21,7 @@ body {
     height: 300px;
   }
   #start-btn, #restart-btn {
-    background-color: lightslategray;
+    background-color: #4B8CA6;
     color: white;
     width: 180px;
     padding: 20px;

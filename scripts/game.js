@@ -29,7 +29,7 @@ class Game {
   // añadir enemigos
   addEnemy = () => {
     if (this.frames % 90 === 0) {
-      let randomNum = Math.random() * canvas.width;
+      let randomNum = Math.random() * canvas.width - 50;
       let randomXint = Math.floor(randomNum);
 
       let newEnemy = new Enemies(randomXint);
@@ -38,16 +38,17 @@ class Game {
   };
 
   // quitar del array los enemigos que se escapan
-//   removeEnemy = () => {
-//     // this.enemiesArr.forEach((eachEnemy) => {
-//     //   if (eachEnemy.y > canvas.height) {
-//     //     eachEnemy.shift();
-//     //   }
-//     // });
-// //     if (this.enemiesArr[0].y > canvas.height){
-// //         this.enemiesArr[0].shift()
-// //     }
-// //   };
+  removeEnemy = () => {
+    this.enemiesArr.forEach((eachEnemy, i) => {
+      if (eachEnemy.y > canvas.height) {
+        this.enemiesArr.splice(i,1);
+      }
+    });
+  }
+//     if (this.enemiesArr[0].y > canvas.height){
+//         this.enemiesArr[0].shift()
+//     }
+//   };
 
   // colisión enemigo vs jugador
   playerEnemyCollision = () => {
@@ -126,7 +127,7 @@ class Game {
     });
 
     // vaciar array de enemigos
-    // this.removeEnemy();
+    this.removeEnemy();
 
     // 3. dibujado
     this.drawFondo();

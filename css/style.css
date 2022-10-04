@@ -28,7 +28,8 @@ body {
     font-size: 20px;
     margin-top: 40px;
     border-radius: 10px; 
-    box-shadow: 3px 3px 2px lightgray;
+    box-shadow: 2px 2px 1px lightgray;
+    border: 2px;
   }
 
   #start-btn:hover, #restart-btn:hover, #home-btn:hover {
@@ -36,6 +37,7 @@ body {
     color: lightslategray;
     font-size: 1.3em;
     cursor: pointer;
+    border: 2px;
   }
 
 

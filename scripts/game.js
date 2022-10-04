@@ -10,6 +10,7 @@ class Game {
 
     this.enemiesArr = [];
     this.bulletArr = [];
+    this.superEnemiesArr = [];
 
     this.frames = 0;
 
@@ -29,7 +30,7 @@ class Game {
 
   // añadir enemigos
   addEnemy = () => {
-    if (this.frames % 90 === 0) {
+    if (this.frames % 60 === 0) {
       let randomNum = Math.random() * canvas.width - 50;
       let randomXint = Math.floor(randomNum);
 
@@ -38,13 +39,24 @@ class Game {
     }
   };
 
-  // quitar del array los enemigos que se escapan
+  // quitar del array los enemigos que se escapan debajo del canvas
   removeEnemy = () => {
     this.enemiesArr.forEach((eachEnemy, i) => {
       if (eachEnemy.y > canvas.height) {
         this.enemiesArr.splice(i, 1);
       }
     });
+  };
+
+  // añadir super Enemigos
+  addSuperEnemies = () => {
+    if (this.frames % 90 === 0) {
+      let randomNum = Math.random() * canvas.width - 50;
+      let randomXint = Math.floor(randomNum);
+
+      let newSuperEnemy = new superEnemies(randomXint);
+      this.superEnemiesArr.push(newSuperEnemy);
+    }
   };
 
   // colisión enemigo vs jugador
@@ -55,6 +67,21 @@ class Game {
         this.playerObj.x + this.playerObj.w > eachEnemy.x &&
         this.playerObj.y < eachEnemy.y + eachEnemy.h &&
         this.playerObj.h + this.playerObj.y > eachEnemy.y
+      ) {
+        // console.log("Colisión")
+        this.gameOver();
+      }
+    });
+  };
+
+  // colisión Super Enemigo vs jugador
+  playerSuperEnemyCollision = () => {
+    this.superEnemiesArr.forEach((eachSuperEnemy) => {
+      if (
+        this.playerObj.x < eachSuperEnemy.x + eachSuperEnemy.w &&
+        this.playerObj.x + this.playerObj.w > eachSuperEnemy.x &&
+        this.playerObj.y < eachSuperEnemy.y + eachSuperEnemy.h &&
+        this.playerObj.h + this.playerObj.y > eachSuperEnemy.y
       ) {
         // console.log("Colisión")
         this.gameOver();
@@ -76,10 +103,10 @@ class Game {
     this.bulletArr.forEach((eachBullet, i) => {
       this.enemiesArr.forEach((eachEnemy, j) => {
         if (
-          this.bulletArr[i].x < this.enemiesArr[j].x + this.enemiesArr[j].w &&
-          this.bulletArr[i].x + this.bulletArr[i].w > this.enemiesArr[j].x &&
-          this.bulletArr[i].y < this.enemiesArr[j].y + this.enemiesArr[j].h &&
-          this.bulletArr[i].h + this.bulletArr[i].y > this.enemiesArr[j].y
+          eachBullet.x < eachEnemy.x + eachEnemy.w &&
+          eachBullet.x + eachBullet.w > eachEnemy.x &&
+          eachBullet.y < eachEnemy.y + eachEnemy.h &&
+          eachBullet.h + eachBullet.y > eachEnemy.y
         ) {
           this.bulletArr.splice(i, 1);
           this.enemiesArr.splice(j, 1);
@@ -90,12 +117,34 @@ class Game {
     });
   };
 
-  drawScore = () => {
-    ctx.font = "bold 30px Arial";
-    ctx.fillStyle = "white";
-    let scoreStr = `SCORE: ${this.score}`;
-    ctx.fillText(scoreStr, canvas.width * 0.4, 50);
+  // colisión bala vs Super Enemigos
+  bulletSuperEnemyCollision = () => {
+    this.bulletArr.forEach((eachBullet, i) => {
+      this.superEnemiesArr.forEach((eachSuperEnemy, j) => {
+        if (
+          this.bulletArr[i].x <
+            this.superEnemiesArr[j].x + this.superEnemiesArr[j].w &&
+          this.bulletArr[i].x + this.bulletArr[i].w >
+            this.superEnemiesArr[j].x &&
+          this.bulletArr[i].y <
+            this.superEnemiesArr[j].y + this.superEnemiesArr[j].h &&
+          this.bulletArr[i].h + this.bulletArr[i].y > this.superEnemiesArr[j].y
+        ) {
+          this.bulletArr.splice(i, 1);
+          this.superEnemiesArr.splice(j, 1);
+          this.score++;
+          this.soundExplosion.play();
+        }
+      });
+    });
   };
+
+  drawScore = ()=>{
+    ctx.font = "bold 30px Arial";
+    let showScore = `SCORE: ${this.score}`;
+    ctx.fillText(showScore, canvas.width * 0.4, 50);
+    ctx.fillStyle = "white";
+  }
 
   gameOver = () => {
     this.isGameOn = false;
@@ -119,6 +168,10 @@ class Game {
       eachEnemy.moveEnemy();
     });
 
+    this.superEnemiesArr.forEach((eachSuperEnemy) => {
+      eachSuperEnemy.moveSuperEnemy();
+    });
+
     // movimiento bullet
     this.bulletArr.forEach((eachBullet) => {
       eachBullet.moveBullet();
@@ -130,20 +183,27 @@ class Game {
     // 3. dibujado
     this.drawFondo();
     this.playerObj.drawPlayer();
-    // this.enemyObj.drawEnemy();
     this.enemiesArr.forEach((eachEnemy) => {
       eachEnemy.drawEnemy();
+    });
+
+    this.superEnemiesArr.forEach((eachSuperEnemy) => {
+      eachSuperEnemy.drawSuperEnemy();
     });
 
     this.addEnemy();
     this.playerEnemyCollision();
     this.bulletEnemyCollision();
+    this.addSuperEnemies();
+    this.playerSuperEnemyCollision();
+    this.bulletSuperEnemyCollision();
 
     this.bulletArr.forEach((eachBullet) => {
       eachBullet.drawBullet();
     });
 
     this.drawScore();
+
     // 4. control de la recursión
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);

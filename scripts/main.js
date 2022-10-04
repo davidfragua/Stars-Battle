@@ -7,6 +7,7 @@ const gameOverScreen = document.querySelector("#gameOver-screen");
 const restartBtn = document.querySelector("#restart-btn");
 const homeBtn = document.querySelector("#home-btn");
 
+
 let gameObj;
 
 // FUNCTIONS
@@ -34,6 +35,9 @@ const goToHome =() =>{
     gameOverScreen.style.display = "none";
     startScreen.style.display = "flex";
 }
+
+
+
 // ADD EVENT LISTENER
 // activo el juego al pinchar en Play
 startBtn.addEventListener("click", startGame);

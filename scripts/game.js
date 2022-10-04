@@ -17,6 +17,7 @@ class Game {
 
     this.soundShoot = new Audio("./sounds/Fire 1.mp3");
     this.soundGameOver = new Audio("./sounds/Game Over.mp3");
+    this.soundExplosion = new Audio("./sounds/explosion.wav");
 
     this.isGameOn = true;
   }
@@ -41,14 +42,10 @@ class Game {
   removeEnemy = () => {
     this.enemiesArr.forEach((eachEnemy, i) => {
       if (eachEnemy.y > canvas.height) {
-        this.enemiesArr.splice(i,1);
+        this.enemiesArr.splice(i, 1);
       }
     });
-  }
-//     if (this.enemiesArr[0].y > canvas.height){
-//         this.enemiesArr[0].shift()
-//     }
-//   };
+  };
 
   // colisión enemigo vs jugador
   playerEnemyCollision = () => {
@@ -87,6 +84,7 @@ class Game {
           this.bulletArr.splice(i, 1);
           this.enemiesArr.splice(j, 1);
           this.score++;
+          this.soundExplosion.play();
         }
       });
     });

@@ -20,7 +20,7 @@ body {
     width: 400px;
     height: 300px;
   }
-  #start-btn, #restart-btn {
+  #start-btn, #restart-btn, #home-btn {
     background-color: #4B8CA6;
     color: white;
     width: 180px;
@@ -31,7 +31,7 @@ body {
     box-shadow: 3px 3px 2px lightgray;
   }
 
-  #start-btn:hover, #restart-btn:hover {
+  #start-btn:hover, #restart-btn:hover, #home-btn:hover {
     background-color: lightgrey;
     color: lightslategray;
     font-size: 1.3em;

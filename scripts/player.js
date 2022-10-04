@@ -4,10 +4,10 @@ class Player {
     this.player = new Image();
     this.player.src = "./images/player.png";
     this.x = 300;
-    this.y = 650;
+    this.y = 700;
     this.w = 50;
     this.h = 70;
-    this.speed = 20;
+    this.speed = 25;
   }
 
   // dibujar jugador

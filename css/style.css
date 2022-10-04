@@ -20,7 +20,7 @@ body {
     width: 400px;
     height: 300px;
   }
-  #start-btn {
+  #start-btn, #restart-btn {
     background-color: lightslategray;
     color: white;
     width: 180px;
@@ -31,7 +31,7 @@ body {
     box-shadow: 3px 3px 2px lightgray;
   }
 
-  #start-btn:hover {
+  #start-btn:hover, #restart-btn:hover {
     background-color: lightgrey;
     color: lightslategray;
     font-size: 1.3em;
@@ -40,6 +40,10 @@ body {
 
 
   #my-canvas {
+    display: none;
+  }
+
+  #gameOver-screen {
     display: none;
   }
  

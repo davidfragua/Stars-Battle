@@ -17,7 +17,7 @@ class Game {
 
     this.soundShoot = new Audio("./sounds/Fire 1.mp3");
     this.soundGameOver = new Audio("./sounds/Game Over.mp3");
-    this.soundExplosion = new Audio("./sounds/explosion.wav");
+    this.soundExplosion = new Audio("./sounds/explosion.mp3");
 
     this.isGameOn = true;
   }

@@ -38,6 +38,8 @@ const goToHome =() =>{
 
 
 
+
+
 // ADD EVENT LISTENER
 // activo el juego al pinchar en Play
 startBtn.addEventListener("click", startGame);

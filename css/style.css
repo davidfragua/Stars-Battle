@@ -37,6 +37,7 @@ body {
     color: lightslategray;
     font-size: 1.3em;
     cursor: pointer;
+    box-shadow: 3px 3px 3px #4B8CA6;
     border: 2px;
   }
 

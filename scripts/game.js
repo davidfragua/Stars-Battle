@@ -5,8 +5,9 @@ class Game {
     this.fondo.src = "./images/background.png";
     // jugador
     this.playerObj = new Player();
-    this.enemyObj = new Enemies();
-    this.bulletObj = new Bullet();
+    // this.enemyObj = new Enemies();
+    // this.bulletObj = new Bullet();
+    
 
     this.enemiesArr = [];
     this.bulletArr = [];
@@ -31,7 +32,7 @@ class Game {
   // añadir enemigos
   addEnemy = () => {
     if (this.frames % 60 === 0) {
-      let randomNum = Math.random() * canvas.width - 50;
+      let randomNum = Math.random() * (canvas.width - 50);
       let randomXint = Math.floor(randomNum);
 
       let newEnemy = new Enemies(randomXint);
@@ -51,7 +52,7 @@ class Game {
   // añadir super Enemigos
   addSuperEnemies = () => {
     if (this.frames % 90 === 0) {
-      let randomNum = Math.random() * canvas.width - 50;
+      let randomNum = Math.random() * (canvas.width - 50);
       let randomXint = Math.floor(randomNum);
 
       let newSuperEnemy = new superEnemies(randomXint);
@@ -68,7 +69,6 @@ class Game {
         this.playerObj.y < eachEnemy.y + eachEnemy.h &&
         this.playerObj.h + this.playerObj.y > eachEnemy.y
       ) {
-        // console.log("Colisión")
         this.gameOver();
       }
     });
@@ -83,7 +83,6 @@ class Game {
         this.playerObj.y < eachSuperEnemy.y + eachSuperEnemy.h &&
         this.playerObj.h + this.playerObj.y > eachSuperEnemy.y
       ) {
-        // console.log("Colisión")
         this.gameOver();
       }
     });
@@ -122,13 +121,10 @@ class Game {
     this.bulletArr.forEach((eachBullet, i) => {
       this.superEnemiesArr.forEach((eachSuperEnemy, j) => {
         if (
-          this.bulletArr[i].x <
-            this.superEnemiesArr[j].x + this.superEnemiesArr[j].w &&
-          this.bulletArr[i].x + this.bulletArr[i].w >
-            this.superEnemiesArr[j].x &&
-          this.bulletArr[i].y <
-            this.superEnemiesArr[j].y + this.superEnemiesArr[j].h &&
-          this.bulletArr[i].h + this.bulletArr[i].y > this.superEnemiesArr[j].y
+          eachBullet.x < eachSuperEnemy.x + eachSuperEnemy.w &&
+          eachBullet.x + eachBullet.w > eachSuperEnemy.x &&
+          eachBullet.y < eachSuperEnemy.y + eachSuperEnemy.h &&
+          eachBullet.h + eachBullet.y > eachSuperEnemy.y
         ) {
           this.bulletArr.splice(i, 1);
           this.superEnemiesArr.splice(j, 1);
@@ -139,6 +135,14 @@ class Game {
     });
   };
 
+
+
+// activar-dibujar escudo
+// ctx.thisplayerObj.drawShield.style = "none";
+
+
+
+  // Score
   drawScore = ()=>{
     ctx.font = "bold 30px Arial";
     let showScore = `SCORE: ${this.score}`;
@@ -146,6 +150,9 @@ class Game {
     ctx.fillStyle = "white";
   }
 
+
+  
+  // Fin del juego
   gameOver = () => {
     this.isGameOn = false;
 
@@ -156,6 +163,7 @@ class Game {
     this.soundGameOver.play();
   };
 
+  // Juego
   gameLoop = () => {
     this.frames = this.frames + 1;
 
@@ -183,6 +191,12 @@ class Game {
     // 3. dibujado
     this.drawFondo();
     this.playerObj.drawPlayer();
+
+    // se activa el escudo si el score es divisible entre 5
+    if (this.score % 5 === 0){
+        this.playerObj.drawShield();
+    }
+   
     this.enemiesArr.forEach((eachEnemy) => {
       eachEnemy.drawEnemy();
     });
@@ -201,6 +215,9 @@ class Game {
     this.bulletArr.forEach((eachBullet) => {
       eachBullet.drawBullet();
     });
+
+    
+
 
     this.drawScore();
 

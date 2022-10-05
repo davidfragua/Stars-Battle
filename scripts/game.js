@@ -30,6 +30,12 @@ class Game {
     // activar juego
     this.isGameOn = true;
   }
+ 
+ 
+scoreGameOverScreen = () =>{
+    scoreGameOver.innerHTML = `${this.score}`
+ }
+
 
   // dibujar fondo
   drawFondo = () => {
@@ -271,6 +277,9 @@ class Game {
 
     // dibujar Score
     this.drawScore();
+
+
+    this.scoreGameOverScreen();
 
     // 4. control de la recursión
     if (this.isGameOn === true) {

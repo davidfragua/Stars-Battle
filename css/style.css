@@ -50,3 +50,16 @@ body {
     display: none;
   }
  
+  #scoreGameOver {
+    font-size: 2em;
+    margin: 40px 0px 20px 0px;
+    text-align: center;
+    color: #3ebff2;
+  }
+
+  #show-score {
+    margin: 0px 20px 0px 20px;
+    font-size: 2em;
+    vertical-align: middle;
+    color: white;
+  }

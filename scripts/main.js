@@ -6,8 +6,13 @@ const startBtn = document.querySelector("#start-btn");
 const gameOverScreen = document.querySelector("#gameOver-screen");
 const restartBtn = document.querySelector("#restart-btn");
 const homeBtn = document.querySelector("#home-btn");
+const scoreGameOver = document.querySelector("#show-score");
+
+
 
 let gameObj;
+
+
 
 // FUNCTIONS
 

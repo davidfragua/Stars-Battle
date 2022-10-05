@@ -5,22 +5,29 @@ class Game {
     this.fondo.src = "./images/background.png";
     // jugador
     this.playerObj = new Player();
-    // this.enemyObj = new Enemies();
-    // this.bulletObj = new Bullet();
-    
 
+    // enemigos
     this.enemiesArr = [];
-    this.bulletArr = [];
     this.superEnemiesArr = [];
 
+    // bala
+    this.bulletArr = [];
+
+    // escudo
+    this.shieldActive = false;
+
+    // frames
     this.frames = 0;
 
+    // score
     this.score = 0;
 
+    // sonidos
     this.soundShoot = new Audio("./sounds/Fire 1.mp3");
     this.soundGameOver = new Audio("./sounds/Game Over.mp3");
     this.soundExplosion = new Audio("./sounds/explosion.mp3");
 
+    // activar juego
     this.isGameOn = true;
   }
 
@@ -49,7 +56,7 @@ class Game {
     });
   };
 
-  // añadir super Enemigos
+  // añadir Super Enemigos
   addSuperEnemies = () => {
     if (this.frames % 90 === 0) {
       let randomNum = Math.random() * (canvas.width - 50);
@@ -135,23 +142,30 @@ class Game {
     });
   };
 
-
-
-// activar-dibujar escudo
-// ctx.thisplayerObj.drawShield.style = "none";
-
-
+  //   colisión entre escudo y enemigo
+  shieldEnemyCollision = () => {
+    this.enemiesArr.forEach((eachEnemy, i) => {
+      if (
+        this.playerObj.shieldX < eachEnemy.x + eachEnemy.w &&
+        this.playerObj.shieldX + this.playerObj.shieldW > eachEnemy.x &&
+        this.playerObj.shieldY < eachEnemy.y + eachEnemy.h &&
+        this.playerObj.shieldH + this.playerObj.shieldY > eachEnemy.y
+      ) {
+        this.enemiesArr.splice(i,1);
+        this.score++
+        this.shieldActive = false;
+      }
+    });
+  };
 
   // Score
-  drawScore = ()=>{
+  drawScore = () => {
     ctx.font = "bold 30px Arial";
     let showScore = `SCORE: ${this.score}`;
     ctx.fillText(showScore, canvas.width * 0.4, 50);
     ctx.fillStyle = "white";
-  }
+  };
 
-
-  
   // Fin del juego
   gameOver = () => {
     this.isGameOn = false;
@@ -172,10 +186,12 @@ class Game {
     gameOverScreen.style.display = "none";
 
     // 2. acciones
+    // movimiento enemigo
     this.enemiesArr.forEach((eachEnemy) => {
       eachEnemy.moveEnemy();
     });
 
+    // movimiento Super Enemigo
     this.superEnemiesArr.forEach((eachSuperEnemy) => {
       eachSuperEnemy.moveSuperEnemy();
     });
@@ -189,36 +205,48 @@ class Game {
     this.removeEnemy();
 
     // 3. dibujado
+    // dibujar fondo
     this.drawFondo();
+
+    // dibujar jugador
     this.playerObj.drawPlayer();
 
-    // se activa el escudo si el score es divisible entre 5
-    if (this.score % 5 === 0){
-        this.playerObj.drawShield();
-    }
-   
-    this.enemiesArr.forEach((eachEnemy) => {
-      eachEnemy.drawEnemy();
-    });
-
-    this.superEnemiesArr.forEach((eachSuperEnemy) => {
-      eachSuperEnemy.drawSuperEnemy();
-    });
-
-    this.addEnemy();
-    this.playerEnemyCollision();
-    this.bulletEnemyCollision();
-    this.addSuperEnemies();
-    this.playerSuperEnemyCollision();
-    this.bulletSuperEnemyCollision();
-
+    // dibujar bala
     this.bulletArr.forEach((eachBullet) => {
       eachBullet.drawBullet();
     });
 
-    
+    // dibujar enemigo
+    this.enemiesArr.forEach((eachEnemy) => {
+      eachEnemy.drawEnemy();
+    });
 
+    // dibujar Super Enemigo
+    this.superEnemiesArr.forEach((eachSuperEnemy) => {
+      eachSuperEnemy.drawSuperEnemy();
+    });
 
+    // añadir enemigos
+    this.addEnemy();
+    this.addSuperEnemies();
+
+    // colisiones
+    this.playerEnemyCollision();
+    this.bulletEnemyCollision();
+
+    this.playerSuperEnemyCollision();
+    this.bulletSuperEnemyCollision();
+
+    this.shieldEnemyCollision();
+
+    // activar-dibujar escudo
+    // se activa el escudo si el score es divisible entre 3
+    if (this.score > 0 && this.score % 3 === 0) {
+      this.playerObj.drawShield();
+      this.shieldActive = true;
+    }
+
+    // dibujar Score
     this.drawScore();
 
     // 4. control de la recursión

@@ -7,17 +7,15 @@ const gameOverScreen = document.querySelector("#gameOver-screen");
 const restartBtn = document.querySelector("#restart-btn");
 const homeBtn = document.querySelector("#home-btn");
 
-
 let gameObj;
 
 // FUNCTIONS
 
+// Empezar el juego
 const startGame = () => {
-  // console.log("iniciando")
   // inicio el juego y oculto la splash screen
   startScreen.style.display = "none";
   canvas.style.display = "block";
-
 
   // nueva versión del juego
   gameObj = new Game();
@@ -26,26 +24,23 @@ const startGame = () => {
   gameObj.gameLoop();
 };
 
+// Volver a jugar
 const restartGame = () => {
   gameOverScreen.style.display = "none";
-  startGame()
+  startGame();
 };
 
-const goToHome =() =>{
-    gameOverScreen.style.display = "none";
-    startScreen.style.display = "flex";
-}
-
-
-
-
+// ir a la Home
+const goToHome = () => {
+  gameOverScreen.style.display = "none";
+  startScreen.style.display = "flex";
+};
 
 // ADD EVENT LISTENER
-// activo el juego al pinchar en Play
+// acciones botones
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", restartGame);
 homeBtn.addEventListener("click", goToHome);
-
 
 // movimiento jugador
 window.addEventListener("keydown", (event) => {

@@ -144,19 +144,40 @@ class Game {
 
   //   colisión entre escudo y enemigo
   shieldEnemyCollision = () => {
-    this.enemiesArr.forEach((eachEnemy, i) => {
+    if(this.shieldActive === true){
+        this.enemiesArr.forEach((eachEnemy, i) => {
+            if (
+            this.playerObj.shieldX < eachEnemy.x + eachEnemy.w &&
+            this.playerObj.shieldX + this.playerObj.shieldW > eachEnemy.x &&
+            this.playerObj.shieldY < eachEnemy.y + eachEnemy.h &&
+            this.playerObj.shieldH + this.playerObj.shieldY > eachEnemy.y
+        ) {
+            this.enemiesArr.splice(i,1);
+            this.score++;
+            this.soundExplosion.play();
+            this.shieldActive = false;
+        }
+    });
+  };
+}
+ //   colisión entre escudo y Super Enemigo
+ shieldSuperEnemyCollision = () => {
+    if(this.shieldActive === true){
+    this.superEnemiesArr.forEach((eachSuperEnemy, i) => {
       if (
-        this.playerObj.shieldX < eachEnemy.x + eachEnemy.w &&
-        this.playerObj.shieldX + this.playerObj.shieldW > eachEnemy.x &&
-        this.playerObj.shieldY < eachEnemy.y + eachEnemy.h &&
-        this.playerObj.shieldH + this.playerObj.shieldY > eachEnemy.y
+        this.playerObj.shieldX < eachSuperEnemy.x + eachSuperEnemy.w &&
+        this.playerObj.shieldX + this.playerObj.shieldW > eachSuperEnemy.x &&
+        this.playerObj.shieldY < eachSuperEnemy.y + eachSuperEnemy.h &&
+        this.playerObj.shieldH + this.playerObj.shieldY > eachSuperEnemy.y
       ) {
-        this.enemiesArr.splice(i,1);
-        this.score++
+        this.superEnemiesArr.splice(i,1);
+        this.score++;
+        this.soundExplosion.play();
         this.shieldActive = false;
       }
     });
   };
+}
 
   // Score
   drawScore = () => {
@@ -238,6 +259,8 @@ class Game {
     this.bulletSuperEnemyCollision();
 
     this.shieldEnemyCollision();
+    this.shieldSuperEnemyCollision();
+   
 
     // activar-dibujar escudo
     // se activa el escudo si el score es divisible entre 3

@@ -85,25 +85,25 @@ body {
     color: white;
   }
 
-/* pantallas menos de 450 px de ancho */
-  @media (width < 450px){
+/* pantallas menos de 770 px de ancho */
+  @media (width < 770px){
 
     #logo {
-      width: 325px;
+      width: 70vw;
     }
 
     #main-image {
-    width: 275px;
-    height: 175px;
+    width: 50vw;
+    height: 25vh;
     }
 
     .container {
-      margin-top: 10px;
+      margin: 10px;
     }
 
     #img-keys {
-      width: 130px;
-      height: 160px;
+      width: 30vw;
+      height: 20vh;
     }
 
    #my-canvas {

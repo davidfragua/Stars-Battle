@@ -23,19 +23,19 @@ class Game {
     this.score = 0;
 
     // sonidos
-    this.soundShoot = new Audio("./sounds/Fire 1.mp3");
-    this.soundGameOver = new Audio("./sounds/Game Over.mp3");
+    this.soundShoot = new Audio("./sounds/fire.mp3");
+    this.soundGameOver = new Audio("./sounds/game-over.mp3");
     this.soundExplosion = new Audio("./sounds/explosion.mp3");
+    this.soundShieldCollision = new Audio("./sounds/shield-collision.mp3");
 
     // activar juego
     this.isGameOn = true;
   }
- 
- 
-scoreGameOverScreen = () =>{
-    scoreGameOver.innerHTML = `${this.score}`
- }
 
+  // mostrar score en Game Over screen
+  scoreGameOverScreen = () => {
+    scoreGameOver.innerHTML = `${this.score}`;
+  };
 
   // dibujar fondo
   drawFondo = () => {
@@ -150,40 +150,71 @@ scoreGameOverScreen = () =>{
 
   //   colisión entre escudo y enemigo
   shieldEnemyCollision = () => {
-    if(this.shieldActive === true){
-        this.enemiesArr.forEach((eachEnemy, i) => {
-            if (
-            this.playerObj.shieldX < eachEnemy.x + eachEnemy.w &&
-            this.playerObj.shieldX + this.playerObj.shieldW > eachEnemy.x &&
-            this.playerObj.shieldY < eachEnemy.y + eachEnemy.h &&
-            this.playerObj.shieldH + this.playerObj.shieldY > eachEnemy.y
+    if (this.shieldActive === true) {
+      this.enemiesArr.forEach((eachEnemy, i) => {
+        if (
+          this.playerObj.shieldX < eachEnemy.x + eachEnemy.w &&
+          this.playerObj.shieldX + this.playerObj.shieldW > eachEnemy.x &&
+          this.playerObj.shieldY < eachEnemy.y + eachEnemy.h &&
+          this.playerObj.shieldH + this.playerObj.shieldY > eachEnemy.y
         ) {
-            this.enemiesArr.splice(i,1);
-            this.score++;
-            this.soundExplosion.play();
-            this.shieldActive = false;
+          this.enemiesArr.splice(i, 1);
+          this.score++;
+          this.soundShieldCollision.play();
+          this.shieldActive = false;
         }
-    });
+      });
+    }
   };
-}
- //   colisión entre escudo y Super Enemigo
- shieldSuperEnemyCollision = () => {
-    if(this.shieldActive === true){
-    this.superEnemiesArr.forEach((eachSuperEnemy, i) => {
-      if (
-        this.playerObj.shieldX < eachSuperEnemy.x + eachSuperEnemy.w &&
-        this.playerObj.shieldX + this.playerObj.shieldW > eachSuperEnemy.x &&
-        this.playerObj.shieldY < eachSuperEnemy.y + eachSuperEnemy.h &&
-        this.playerObj.shieldH + this.playerObj.shieldY > eachSuperEnemy.y
-      ) {
-        this.superEnemiesArr.splice(i,1);
-        this.score++;
-        this.soundExplosion.play();
-        this.shieldActive = false;
-      }
-    });
+  //   colisión entre escudo y Super Enemigo
+  shieldSuperEnemyCollision = () => {
+    if (this.shieldActive === true) {
+      this.superEnemiesArr.forEach((eachSuperEnemy, i) => {
+        if (
+          this.playerObj.shieldX < eachSuperEnemy.x + eachSuperEnemy.w &&
+          this.playerObj.shieldX + this.playerObj.shieldW > eachSuperEnemy.x &&
+          this.playerObj.shieldY < eachSuperEnemy.y + eachSuperEnemy.h &&
+          this.playerObj.shieldH + this.playerObj.shieldY > eachSuperEnemy.y
+        ) {
+          this.superEnemiesArr.splice(i, 1);
+          this.score++;
+          this.soundShieldCollision.play();
+          this.shieldActive = false;
+        }
+      });
+    }
   };
-}
+
+
+
+// incrementar dificultad enemigos
+  raiseDifficultEnemies = () =>{
+    this.enemiesArr.forEach((eachEnemy) => {
+      eachEnemy.speed = 5;
+    })
+  }
+
+
+  raiseDifficultSuperEnemies = () =>{
+    this.superEnemiesArr.forEach((eachSuperEnemy) => {
+      eachSuperEnemy.speed = 6.5;
+    })
+  }
+
+
+  // //! FUNCIÓN INTERVALO
+  // shieldRandom = () => {
+  //   setInterval(()=>{
+  //     this.playerObj.drawShield();
+  //     this.shieldActive = true;
+  //   }, 3000)
+  // }
+
+
+
+
+
+
 
   // Score
   drawScore = () => {
@@ -231,6 +262,12 @@ scoreGameOverScreen = () =>{
     // vaciar array de enemigos
     this.removeEnemy();
 
+    // incrementar dificultad Enemigos
+    setInterval(this.raiseDifficultEnemies, 5000);
+
+     // incrementar dificultad Super Enemigos
+     setInterval(this.raiseDifficultSuperEnemies, 5000);
+
     // 3. dibujado
     // dibujar fondo
     this.drawFondo();
@@ -253,6 +290,11 @@ scoreGameOverScreen = () =>{
       eachSuperEnemy.drawSuperEnemy();
     });
 
+    
+    // //
+    // this.shieldRandom();
+
+
     // añadir enemigos
     this.addEnemy();
     this.addSuperEnemies();
@@ -266,20 +308,20 @@ scoreGameOverScreen = () =>{
 
     this.shieldEnemyCollision();
     this.shieldSuperEnemyCollision();
-   
 
     // activar-dibujar escudo
     // se activa el escudo si el score es divisible entre 3
-    if (this.score > 0 && this.score % 3 === 0) {
-      this.playerObj.drawShield();
-      this.shieldActive = true;
-    }
+    // if (this.score > 0 && this.score % 3 === 0) {
+    //   this.playerObj.drawShield();
+    //   this.shieldActive = true;
+    // }
 
     // dibujar Score
     this.drawScore();
 
-
+    // dibujar Score en Game Over screen
     this.scoreGameOverScreen();
+
 
     // 4. control de la recursión
     if (this.isGameOn === true) {

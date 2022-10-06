@@ -11,7 +11,7 @@ class Player {
 
     // propiedades del escudo
     this.shield = new Image();
-    this.shield.src = ("./images/shield.png")
+    this.shield.src = "./images/shield.png";
     this.shieldX = this.x - 5;
     this.shieldY = this.y - 40;
     this.shieldW = 60;
@@ -19,12 +19,15 @@ class Player {
   }
 
   // dibujar escudo
-  drawShield = () =>{
-    ctx.drawImage(this.shield, this.shieldX, this.shieldY, this.shieldW, this.shieldH)
-  }
-
-  
-
+  drawShield = () => {
+    ctx.drawImage(
+      this.shield,
+      this.shieldX,
+      this.shieldY,
+      this.shieldW,
+      this.shieldH
+    );
+  };
 
   // dibujar jugador
   drawPlayer = () => {

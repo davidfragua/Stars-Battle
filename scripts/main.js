@@ -8,11 +8,7 @@ const restartBtn = document.querySelector("#restart-btn");
 const homeBtn = document.querySelector("#home-btn");
 const scoreGameOver = document.querySelector("#show-score");
 
-
-
 let gameObj;
-
-
 
 // FUNCTIONS
 
@@ -25,8 +21,13 @@ const startGame = () => {
   // nueva versión del juego
   gameObj = new Game();
 
+
+  // ejecuta intervalo para mostrar escudo
+  // gameObj.shieldRandom();
+
   // ejecuta gameLoop
   gameObj.gameLoop();
+
 };
 
 // Volver a jugar

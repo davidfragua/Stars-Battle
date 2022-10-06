@@ -22,11 +22,13 @@ const startGame = () => {
   gameObj = new Game();
 
 
-  // ejecuta intervalo para mostrar escudo
-  // gameObj.shieldRandom();
 
   // ejecuta gameLoop
   gameObj.gameLoop();
+
+  // // ejecuta intervalo para mostrar escudo
+  // gameObj.shieldRandom();
+
 
 };
 

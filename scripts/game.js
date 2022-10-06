@@ -16,6 +16,9 @@ class Game {
     // escudo
     this.shieldActive = false;
 
+    // Energy Ball
+    this.energyBallArr = [];
+
     // frames
     this.frames = 0;
 
@@ -27,6 +30,7 @@ class Game {
     this.soundGameOver = new Audio("./sounds/game-over.mp3");
     this.soundExplosion = new Audio("./sounds/explosion.mp3");
     this.soundShieldCollision = new Audio("./sounds/shield-collision.mp3");
+    this.soundBallEnergy = new Audio("./sounds/ball-energy.flac");
 
     // activar juego
     this.isGameOn = true;
@@ -70,6 +74,17 @@ class Game {
 
       let newSuperEnemy = new superEnemies(randomXint);
       this.superEnemiesArr.push(newSuperEnemy);
+    }
+  };
+
+  // añadir Energy Ball
+  addEnergyBall = () => {
+    if (this.frames % 300 === 0) {
+      let randomNum = Math.random() * (canvas.width - 50);
+      let randomXint = Math.floor(randomNum);
+
+      let newEnergyBall = new EnergyBall(randomXint);
+      this.energyBallArr.push(newEnergyBall);
     }
   };
 
@@ -185,40 +200,62 @@ class Game {
     }
   };
 
+  // mostrar escudo y activar
+  showShield = () => {
+    if (this.shieldActive === true) {
+      this.playerObj.drawShield();
+    }
+  };
 
+  // activar escudo
+  activateShield = () => {
+    this.shieldActive = true;
+    setTimeout(() => {
+      this.shieldActive = false;
+    }, 3000);
+  };
 
-// incrementar dificultad enemigos
-  raiseDifficultEnemies = () =>{
+  // colisión jugador vs Energy Ball
+  playerEnergyBallCollision = () => {
+    this.energyBallArr.forEach((eachEnergyBall, i) => {
+      if (
+        this.playerObj.x < eachEnergyBall.x + eachEnergyBall.w &&
+        this.playerObj.x + this.playerObj.w > eachEnergyBall.x &&
+        this.playerObj.y < eachEnergyBall.y + eachEnergyBall.h &&
+        this.playerObj.h + this.playerObj.y > eachEnergyBall.y
+      ) {
+        this.energyBallArr.splice(i, 1);
+        this.soundBallEnergy.play();
+        this.activateShield();
+      }
+    });
+  };
+
+  // incrementar dificultad enemigos
+  raiseDifficultEnemies = () => {
     this.enemiesArr.forEach((eachEnemy) => {
       eachEnemy.speed = 5;
-    })
-  }
+    });
+  };
 
-
-  raiseDifficultSuperEnemies = () =>{
+  // incrementar dificultad Super Enemigos
+  raiseDifficultSuperEnemies = () => {
     this.superEnemiesArr.forEach((eachSuperEnemy) => {
       eachSuperEnemy.speed = 6.5;
-    })
-  }
-
+    });
+  };
 
   // //! FUNCIÓN INTERVALO
   // shieldRandom = () => {
-  //   setInterval(()=>{
+  //   setInterval(() => {
   //     this.playerObj.drawShield();
   //     this.shieldActive = true;
-  //   }, 3000)
-  // }
-
-
-
-
-
-
+  //   }, 3000);
+  // };
 
   // Score
   drawScore = () => {
-    ctx.font = "bold 30px Arial";
+    ctx.font = "bold 30px Verdana";
     let showScore = `SCORE: ${this.score}`;
     ctx.fillText(showScore, canvas.width * 0.4, 50);
     ctx.fillStyle = "white";
@@ -259,14 +296,19 @@ class Game {
       eachBullet.moveBullet();
     });
 
+    // movimiento Energy Ball
+    this.energyBallArr.forEach((eachEnergyBall) => {
+      eachEnergyBall.moveEnergyBall();
+    });
+
     // vaciar array de enemigos
     this.removeEnemy();
 
     // incrementar dificultad Enemigos
     setInterval(this.raiseDifficultEnemies, 5000);
 
-     // incrementar dificultad Super Enemigos
-     setInterval(this.raiseDifficultSuperEnemies, 5000);
+    // incrementar dificultad Super Enemigos
+    setInterval(this.raiseDifficultSuperEnemies, 5000);
 
     // 3. dibujado
     // dibujar fondo
@@ -290,14 +332,20 @@ class Game {
       eachSuperEnemy.drawSuperEnemy();
     });
 
-    
-    // //
-    // this.shieldRandom();
+    // dibujar Energy Ball
+    this.energyBallArr.forEach((eachEnergyBall) => {
+      eachEnergyBall.drawEnergyBall();
+    });
 
+    //
+    this.showShield();
 
     // añadir enemigos
     this.addEnemy();
     this.addSuperEnemies();
+
+    // añadir Energu Ball
+    this.addEnergyBall();
 
     // colisiones
     this.playerEnemyCollision();
@@ -309,7 +357,9 @@ class Game {
     this.shieldEnemyCollision();
     this.shieldSuperEnemyCollision();
 
-    // activar-dibujar escudo
+    this.playerEnergyBallCollision();
+
+    //! activar-dibujar escudo
     // se activa el escudo si el score es divisible entre 3
     // if (this.score > 0 && this.score % 3 === 0) {
     //   this.playerObj.drawShield();
@@ -321,7 +371,6 @@ class Game {
 
     // dibujar Score en Game Over screen
     this.scoreGameOverScreen();
-
 
     // 4. control de la recursión
     if (this.isGameOn === true) {

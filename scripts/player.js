@@ -20,7 +20,13 @@ class Player {
 
   // dibujar escudo
   drawShield = () => {
-    ctx.drawImage(this.shield, this.shieldX, this.shieldY, this.shieldW, this.shieldH);
+    ctx.drawImage(
+      this.shield,
+      this.shieldX,
+      this.shieldY,
+      this.shieldW,
+      this.shieldH
+    );
   };
 
   // dibujar jugador

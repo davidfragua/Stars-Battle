@@ -212,7 +212,7 @@ class Game {
     this.shieldActive = true;
     setTimeout(() => {
       this.shieldActive = false;
-    }, 3000);
+    }, 4000);
   };
 
   // colisión jugador vs Energy Ball

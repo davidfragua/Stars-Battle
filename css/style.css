@@ -4,6 +4,15 @@ body {
     color: white;
   }
 
+
+
+
+#logo {
+  width: "650px";
+}
+
+
+
   #my-canvas {
     background-color: lightgray;
   }
@@ -16,10 +25,13 @@ body {
     margin: 30px;
   }
 
-  #main-image {
+ #main-image {
     width: 400px;
     height: 300px;
   }
+
+
+
   #start-btn, #restart-btn, #home-btn {
     background-color: #4B8CA6;
     color: white;
@@ -41,15 +53,24 @@ body {
     border: 2px;
   }
 
+  #img-keys {
+    width: 150px;
+    height: 180px;
+  }
 
   #my-canvas {
     display: none;
+    
   }
 
   #gameOver-screen {
     display: none;
   }
  
+  #gameover-img {
+    width: 600px;
+  }
+
   #scoreGameOver {
     font-size: 2em;
     margin: 40px 0px 20px 0px;
@@ -62,4 +83,47 @@ body {
     font-size: 2em;
     vertical-align: middle;
     color: white;
+  }
+
+/* pantallas menos de 450 px de ancho */
+  @media (width < 450px){
+
+    #logo {
+      width: 325px;
+    }
+
+    #main-image {
+    width: 275px;
+    height: 175px;
+    }
+
+    .container {
+      margin-top: 10px;
+    }
+
+    #img-keys {
+      width: 130px;
+      height: 160px;
+    }
+
+   #my-canvas {
+    width: 90vw;
+    height: 90vh;
+   }
+
+
+   #gameover-img {
+    width: 80vw;
+   }
+
+   #scoreGameOver {
+    font-size: 1.5em;
+   }
+
+   #show-score {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+   }
+
   }

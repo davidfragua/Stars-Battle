@@ -11,25 +11,25 @@
     <div class = "container">
         <!-- SPLASH SCREEN-->
         <div id = "splash-screen" class="container">
-            <img src = "./images/logo-stars-battle.png" alt="logo Stars Battle" width = "650px">
+            <img id = "logo" src = "./images/logo-stars-battle.png" alt="logo Stars Battle" >
             </br>
-            <img src = "./images/space.png" alt="Juego Stars Battle" width = "350px" height = "250px">
+            <img id = "main-image" src = "./images/space.png" alt="Juego Stars Battle">
             <button id = "start-btn">PLAY</button>
         </br>
     </br>
             <h3>CONTROLES DEL JUEGO</h3>
-            <img src = "./images/game-keys.png" alt="Controles del juego" width = "150px" height = "180px">
+            <img id = "img-keys" src = "./images/game-keys.png" alt="Controles del juego">
 
         </div>
 
         <!-- GAME SCREEN-->
   
-        <canvas id = "my-canvas" width="600" height="800"></canvas>
+        <canvas id = "my-canvas" width = "600"  height = "800"></canvas>
         
         <!-- GAMEOVER SCREEN-->
 
         <div id = "gameOver-screen" class="container">
-          <img src = "./images/game-over.png" alt="Game Over" width = "600px">
+          <img id = "gameover-img" src = "./images/game-over.png" alt="Game Over">
             <div id = "scoreGameOver">¡¡ HAS DESTRUIDO <span id = "show-score"></span> NAVES ENEMIGAS !!</div>
             <button id = "home-btn" >HOME</button>
             <button id = "restart-btn" >PLAY AGAIN</button>

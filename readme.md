@@ -1,6 +1,6 @@
 # STARS BATTLE
 
-https://github.com/davidfragua/Stars-Battle
+https://davidfragua.github.io/Stars-Battle/
 
 ## Description:
 
@@ -120,4 +120,4 @@ Tareas - Trello:
 https://trello.com/b/RXx5KKap/stars-battle
 
 Demo del juego:
-https://github.com/davidfragua/Stars-Battle
+https://davidfragua.github.io/Stars-Battle/

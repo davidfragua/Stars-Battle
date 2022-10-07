@@ -21,15 +21,11 @@ const startGame = () => {
   // nueva versión del juego
   gameObj = new Game();
 
-
-
   // ejecuta gameLoop
   gameObj.gameLoop();
 
   // // ejecuta intervalo para mostrar escudo
   // gameObj.shieldRandom();
-
-
 };
 
 // Volver a jugar

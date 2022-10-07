@@ -27,10 +27,15 @@ class Game {
 
     // sonidos
     this.soundShoot = new Audio("./sounds/fire.mp3");
+    this.soundShoot.volume = 0.05;
     this.soundGameOver = new Audio("./sounds/game-over.mp3");
+    this.soundGameOver.volume = 0.05;
     this.soundExplosion = new Audio("./sounds/explosion.mp3");
+    this.soundExplosion.volume = 0.05;
     this.soundShieldCollision = new Audio("./sounds/shield-collision.mp3");
+    this.soundShieldCollision.volume = 0.05;
     this.soundBallEnergy = new Audio("./sounds/ball-energy.flac");
+    this.soundBallEnergy.volume = 0.05;
 
     // activar juego
     this.isGameOn = true;
@@ -245,14 +250,6 @@ class Game {
     });
   };
 
-  // //! FUNCIÓN INTERVALO
-  // shieldRandom = () => {
-  //   setInterval(() => {
-  //     this.playerObj.drawShield();
-  //     this.shieldActive = true;
-  //   }, 3000);
-  // };
-
   // Score
   drawScore = () => {
     ctx.font = "bold 30px Verdana";
@@ -358,13 +355,6 @@ class Game {
     this.shieldSuperEnemyCollision();
 
     this.playerEnergyBallCollision();
-
-    //! activar-dibujar escudo
-    // se activa el escudo si el score es divisible entre 3
-    // if (this.score > 0 && this.score % 3 === 0) {
-    //   this.playerObj.drawShield();
-    //   this.shieldActive = true;
-    // }
 
     // dibujar Score
     this.drawScore();

@@ -27,15 +27,15 @@ class Game {
 
     // sonidos
     this.soundShoot = new Audio("./sounds/fire.mp3");
-    this.soundShoot.volume = 0.05;
+    
     this.soundGameOver = new Audio("./sounds/game-over.mp3");
-    this.soundGameOver.volume = 0.05;
+    
     this.soundExplosion = new Audio("./sounds/explosion.mp3");
-    this.soundExplosion.volume = 0.05;
+    
     this.soundShieldCollision = new Audio("./sounds/shield-collision.mp3");
-    this.soundShieldCollision.volume = 0.05;
+    
     this.soundBallEnergy = new Audio("./sounds/ball-energy.flac");
-    this.soundBallEnergy.volume = 0.05;
+    
 
     // activar juego
     this.isGameOn = true;
@@ -127,6 +127,7 @@ class Game {
     let positionY = this.playerObj.y;
     let newBullet = new Bullet(positionX + 23, positionY + 10);
     this.bulletArr.push(newBullet);
+    this.soundShoot.volume = 0.05;
     this.soundShoot.play();
   };
 
@@ -143,6 +144,7 @@ class Game {
           this.bulletArr.splice(i, 1);
           this.enemiesArr.splice(j, 1);
           this.score++;
+          this.soundExplosion.volume = 0.05;
           this.soundExplosion.play();
         }
       });
@@ -162,6 +164,7 @@ class Game {
           this.bulletArr.splice(i, 1);
           this.superEnemiesArr.splice(j, 1);
           this.score++;
+          this.soundExplosion.volume = 0.05;
           this.soundExplosion.play();
         }
       });
@@ -180,6 +183,7 @@ class Game {
         ) {
           this.enemiesArr.splice(i, 1);
           this.score++;
+          this.soundShieldCollision.volume = 0.05;
           this.soundShieldCollision.play();
           this.shieldActive = false;
         }
@@ -198,6 +202,7 @@ class Game {
         ) {
           this.superEnemiesArr.splice(i, 1);
           this.score++;
+          this.soundShieldCollision.volume = 0.05;
           this.soundShieldCollision.play();
           this.shieldActive = false;
         }
@@ -230,6 +235,7 @@ class Game {
         this.playerObj.h + this.playerObj.y > eachEnergyBall.y
       ) {
         this.energyBallArr.splice(i, 1);
+        this.soundBallEnergy.volume = 0.05;
         this.soundBallEnergy.play();
         this.activateShield();
       }
@@ -265,7 +271,7 @@ class Game {
     canvas.style.display = "none";
 
     gameOverScreen.style.display = "flex";
-
+    this.soundGameOver.volume = 0.05;
     this.soundGameOver.play();
   };
 

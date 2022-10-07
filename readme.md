@@ -29,17 +29,20 @@ El nivel de dificultad se incrementa a los 5 segundos al aumentar las velocidade
 
 Además, aleatoriamente, se mostrarán una Bolas de Energía, que puedes capturar para activar un escudo protector para tu nave.
 
-Ete escudo protector estará activa durante 4 segundos o hasta que colisiones con un enemigo.
+Este escudo protector estará activa durante 4 segundos o hasta que colisiones con un enemigo.
 
 
 ## Project Structure:
 
 - main.js
+```
 startGame()
 restartGame()
 goToHome()
+```
 
 - game.js
+```
 Game()
 scoreGameOverScreen()
 drawFondo()
@@ -60,8 +63,10 @@ raiseDifficultEnemies()
 drawScore()
 gameOver()
 gameLoop()
+```
 
 - player.js
+```
 Player()
 drawShield()
 drawPlayer()
@@ -69,26 +74,35 @@ movePlayerRight()
 movePlayerLeft()
 movePlayerUp()
 movePlayerDown()
+```
 
 - enemies.js
+```
 Enemies()
 drawEnemy()
 moveEnemy()
+```
 
 - superEnemies.js
+```
 superEnemies()
 drawSuperEnemy()
 moveSuperEnemy()
+```
 
 - bullet.js
+```
 Bullet()
 drawBullet()
 moveBullet()
+```
 
 - energyBall.js
+```
 EnergyBall()
 drawEnergyBall()
 moveEnergyBall()
+```
 
 ## States and Transitions:
 Habrá 3 pantallas:
